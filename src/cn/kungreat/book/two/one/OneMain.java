@@ -1,18 +1,16 @@
 package cn.kungreat.book.two.one;
 
+import java.util.Arrays;
+
 public class OneMain {
-    public static void main(String[] args) {
-//        System.out.println(Thread.currentThread().getThreadGroup());
+    public static void main(String[] args) throws InterruptedException {
 
         ThreadGroup threadGroup1 = new ThreadGroup("my-1");
         ThreadGroup threadGroup2 = new ThreadGroup(threadGroup1,"my-2");
-
-
-        ThreadGroup parent = threadGroup2.getParent();
-        while (parent != null){
-            System.out.println(parent);
-            parent = parent.getParent();
-        }
-
+        threadGroup2.setMaxPriority(2);
+        Thread thread = new Thread(threadGroup2, "老唐");
+        thread.start();
+        System.out.println(thread.getPriority());
+        System.out.println("threadGroup2:"+threadGroup2.getMaxPriority());
     }
 }
