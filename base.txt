@@ -1,26 +1,9 @@
 
-    private Thread(ThreadGroup g, Runnable target, String name,
-                         long stackSize, AccessControlContext acc,
-                         boolean inheritThreadLocals) {
-      if (name == null) {
-          throw new NullPointerException("name cannot be null");
-      }
-      this.name = name;
-      Thread parent = currentThread();
-      SecurityManager security = System.getSecurityManager();
+    增加堆栈大小 -Xss128m
 
-      setPriority(priority);
-    }
-    public final void setPriority(int newPriority) {
-      ThreadGroup g;
-      checkAccess();
-      if (newPriority > MAX_PRIORITY || newPriority < MIN_PRIORITY) {
-          throw new IllegalArgumentException();
-      }
-      if((g = getThreadGroup()) != null) {
-          if (newPriority > g.getMaxPriority()) {
-              newPriority = g.getMaxPriority();
-          }
-          setPriority0(priority = newPriority);
-      }
-    }
+"C:\Program Files\Java\jdk-17.0.3.1\bin\java.exe" -Xss128m
+"-javaagent:C:\JetBrains\lib\idea_rt.jar=59521
+           :C:\JetBrains\bin"
+-Dfile.encoding=UTF-8
+-classpath C:\Users\kungreat\IdeaProjects\bookteach\out\production\bookteach
+           cn.kungreat.book.two.two.TwoMain
