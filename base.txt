@@ -1,9 +1,14 @@
 
     增加堆栈大小 -Xss128m
+class EventHandler {
+      volatile boolean eventNotificationNotReceived;
+      void waitForEventAndHandleIt() {
+               while (eventNotificationNotReceived) {
+                     java.lang.Thread.onSpinWait();
+               }
+               readAndProcessEvent();
+      }
+      void readAndProcessEvent() {
 
-"C:\Program Files\Java\jdk-17.0.3.1\bin\java.exe" -Xss128m
-"-javaagent:C:\JetBrains\lib\idea_rt.jar=59521
-           :C:\JetBrains\bin"
--Dfile.encoding=UTF-8
--classpath C:\Users\kungreat\IdeaProjects\bookteach\out\production\bookteach
-           cn.kungreat.book.two.two.TwoMain
+      }
+ }
