@@ -1,14 +1,25 @@
 
     增加堆栈大小 -Xss128m
-class EventHandler {
-      volatile boolean eventNotificationNotReceived;
-      void waitForEventAndHandleIt() {
-               while (eventNotificationNotReceived) {
-                     java.lang.Thread.onSpinWait();
-               }
-               readAndProcessEvent();
-      }
-      void readAndProcessEvent() {
+   public final void join() throws InterruptedException {
+            join(0);
+   }
 
-      }
- }
+   public final synchronized void join(final long millis)
+    throws InterruptedException {
+        if (millis > 0) {
+            if (isAlive()) {
+                final long startTime = System.nanoTime();
+                long delay = millis;
+                do {
+                    wait(delay);
+                } while (isAlive() && (delay = millis -
+                        TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime)) > 0);
+            }
+        } else if (millis == 0) {
+            while (isAlive()) {
+                wait(0);
+            }
+        } else {
+            throw new IllegalArgumentException("超时值为负");
+        }
+    }
