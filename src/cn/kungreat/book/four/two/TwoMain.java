@@ -1,8 +1,5 @@
 package cn.kungreat.book.four.two;
 
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 /*
@@ -10,7 +7,9 @@ import java.util.Random;
 */
 public class TwoMain {
 
-    //LINK 类似Map结构里的key
+    /*
+    * LINK、LINKTWO 类似Map结构里的key
+    */
     public static final ThreadLocal<Object> LINK = new ThreadLocal<>();
     public static final ThreadLocal<Object> LINKTWO = new ThreadLocal<>();
 
@@ -23,8 +22,8 @@ public class TwoMain {
         private static final Random RANDOM = new Random();
         @Override
         public void run() {
-            LINK.set(RANDOM.nextInt());
-            LINKTWO.set("LINKTWO");
+            LINK.set(RANDOM.nextInt());//设置线程局部变量数据
+            LINKTWO.set("LINKTWO");//设置线程局部变量数据
             LinkOne.one();
         }
     }
