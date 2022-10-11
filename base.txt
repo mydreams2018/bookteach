@@ -1,25 +1,8 @@
 
-    增加堆栈大小 -Xss128m
-   public final void join() throws InterruptedException {
-            join(0);
-   }
+/*
+*线程局部变量 功能实现需要三方参与,有二个操作入口.
+* Thread对象提供数据保存点、
+* ThreadLocal对象提供操作入口、InheritableThreadLocal对象提供操作入口、
+* ThreadLocalMap对象提供对数据操作的功能.
+*/
 
-   public final synchronized void join(final long millis)
-    throws InterruptedException {
-        if (millis > 0) {
-            if (isAlive()) {
-                final long startTime = System.nanoTime();
-                long delay = millis;
-                do {
-                    wait(delay);
-                } while (isAlive() && (delay = millis -
-                        TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime)) > 0);
-            }
-        } else if (millis == 0) {
-            while (isAlive()) {
-                wait(0);
-            }
-        } else {
-            throw new IllegalArgumentException("超时值为负");
-        }
-    }
