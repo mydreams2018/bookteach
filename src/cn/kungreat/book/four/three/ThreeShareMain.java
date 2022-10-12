@@ -10,15 +10,15 @@ package cn.kungreat.book.four.three;
  */
 public class ThreeShareMain {
 
-    public static final ThreadLocal<String> THREAD_LOCAL = new InheritableThreadLocal<>();
+    public static final InheritableThreadLocal<String> THREAD_LOCAL = new InheritableThreadLocal<>();
 
     public static void main(String[] args) {
-        THREAD_LOCAL.set("test");
+        THREAD_LOCAL.set("test");//设置线程局部变量数据
         ThreadLocalsRun threadLocalsRun = new ThreadLocalsRun();
         new Thread(Thread.currentThread().getThreadGroup(),threadLocalsRun, "A",
                 0, false).start();
         Thread currentThread = Thread.currentThread();
-        System.out.println(currentThread.getName()+":"+THREAD_LOCAL.get());
+        System.out.println(currentThread.getName()+":"+THREAD_LOCAL.get());//获得线程局部变量数据
     }
 
     static class ThreadLocalsRun implements Runnable{
@@ -26,7 +26,7 @@ public class ThreeShareMain {
         @Override
         public void run() {
             Thread currentThread = Thread.currentThread();
-            System.out.println(currentThread.getName()+":"+THREAD_LOCAL.get());
+            System.out.println(currentThread.getName()+":"+THREAD_LOCAL.get());//获得线程局部变量数据
         }
     }
 }
