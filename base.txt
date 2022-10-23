@@ -6,3 +6,4 @@
 * ThreadLocalMap对象提供对数据操作的功能.
 */
 
+弱引用其核心概念就是当一个对象地址只存在于Reference类referent对象字段中引用时,GC回收垃圾时此字段数据会被清空.
