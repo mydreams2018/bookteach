@@ -18,7 +18,6 @@ public class ReadWriteMain {
         }, "B");
         threadA.start();
         threadB.start();
-
     }
 
     static class RunnableMy implements Runnable{
@@ -27,7 +26,8 @@ public class ReadWriteMain {
         public void run() {
             readLock.lock();
             try {
-                System.out.println(Thread.currentThread().getName());
+                System.out.println(Thread.currentThread().getName()+":"+System.currentTimeMillis());
+                //输出当前执行线程名称:当前系统时间毫秒
                 Thread.sleep(5000);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -39,7 +39,8 @@ public class ReadWriteMain {
         public void writeTest(){
             writeLock.lock();
             try {
-                System.out.println(Thread.currentThread().getName());
+                System.out.println(Thread.currentThread().getName()+":"+System.currentTimeMillis());
+                //输出当前执行线程名称:当前系统时间毫秒
                 Thread.sleep(5000);
             } catch (Exception e) {
                 e.printStackTrace();
