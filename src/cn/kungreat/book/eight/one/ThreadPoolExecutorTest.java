@@ -12,7 +12,6 @@ public class ThreadPoolExecutorTest {
             , new MyDiscardPolicy());
 
     public static void main(String[] args) throws InterruptedException {
-//        THREAD_POOL.prestartCoreThread();
         for (int i = 0; i < 10; i++) {
             THREAD_POOL.execute(new Runnable() {
                 @Override
@@ -22,18 +21,17 @@ public class ThreadPoolExecutorTest {
                         Thread.sleep(2000);
                         System.out.println(Thread.currentThread().getName());
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        System.out.println(Thread.currentThread().getName()+":InterruptedException");
                     }
                 }
             });
         }
-//        THREAD_POOL.allowCoreThreadTimeOut(true);
         Thread.sleep(500);
         System.out.println(THREAD_POOL.shutdownNow());
-        System.out.println(THREAD_POOL.isShutdown());
-        System.out.println(THREAD_POOL.isTerminating());
-        Thread.sleep(2000);
-        System.out.println(THREAD_POOL.isTerminated());
+        System.out.println("isShutdown:"+THREAD_POOL.isShutdown());
+        System.out.println("isTerminating:"+THREAD_POOL.isTerminating());
+        Thread.sleep(6000);
+        System.out.println("isTerminated:"+THREAD_POOL.isTerminated());
         System.out.println("main-end");
     }
 
@@ -41,12 +39,6 @@ public class ThreadPoolExecutorTest {
 
         public MyDiscardPolicy() { }
 
-        /**
-         * Does nothing, which has the effect of discarding task r.
-         *
-         * @param r the runnable task requested to be executed
-         * @param e the executor attempting to execute this task
-         */
         public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
             System.out.println("所有的容量已经满了,到了拒绝处理器了");
         }
