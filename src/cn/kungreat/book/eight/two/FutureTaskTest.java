@@ -1,4 +1,4 @@
-package cn.kungreat.book.eight.one;
+package cn.kungreat.book.eight.two;
 
 
 import java.util.concurrent.FutureTask;
@@ -6,23 +6,20 @@ import java.util.concurrent.TimeUnit;
 
 public class FutureTaskTest {
 
-    private static final FutureTask<Integer> FUTURE_TASK = new FutureTask<>(new RunnableImpl(),100);
+    private static final FutureTask<Integer> FUTURE_TASK =
+                        new FutureTask<>(new RunnableImpl(),100);
 
     public static void main(String[] args) throws Exception {
         new Thread(FUTURE_TASK,"A").start();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    System.out.println(FUTURE_TASK.get());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        new Thread(() -> {
+            try {
+                System.out.println(FUTURE_TASK.get());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         },"B").start();
-
         Thread.sleep(500);
-        FUTURE_TASK.cancel(true);
+        FUTURE_TASK.cancel(false);
         System.out.println("main-end");
     }
 
