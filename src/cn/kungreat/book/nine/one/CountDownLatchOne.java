@@ -1,38 +1,28 @@
 package cn.kungreat.book.nine.one;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
-public class CountDownLatchTest {
+public class CountDownLatchOne {
 
     static final CountDownLatch startSignal = new CountDownLatch(1);
-    static final CountDownLatch doneSignal = new CountDownLatch(10);
 
     public static void main(String[] args) throws Exception {
-        for (int i = 0; i < 10; ++i) {
-            new Thread(new Worker()).start();
-        }
+        new Thread(new Worker(),"A").start();
         System.out.println("doSomethingElse");
         Thread.sleep(2000);
         startSignal.countDown();
-        doneSignal.await();
-        System.out.println("main:"+doneSignal.getCount());
     }
 
    static class Worker implements Runnable {
 
         public void run() {
             try {
-                startSignal.await();
+                System.out.println(startSignal.await(1, TimeUnit.SECONDS));
                 System.out.println(Thread.currentThread().getName());
-                doWork();
-            } catch (InterruptedException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        }
-
-        synchronized static void doWork() {
-            System.out.println(doneSignal.getCount());
-            doneSignal.countDown();
         }
     }
 
