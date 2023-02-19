@@ -11,3 +11,16 @@
             System.out.println(1111);
         }
 弱引用其核心概念就是当一个对象地址只存在于Reference类referent对象字段中引用时,GC回收垃圾时此字段数据会被清空.
+
+git config --list
+git config --global user.name "kungreat2021"
+git config --global user.email kungreat2021@outlook.com
+git config --list
+ssh-keygen -t rsa -b 4096 -C "kungreat2021@outlook.com"
+git config --list
+git config core.ignorecase false
+git config --global core.ignorecase false
+
+
+
+git push -u origin master
