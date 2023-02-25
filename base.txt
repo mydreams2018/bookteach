@@ -20,7 +20,7 @@ ssh-keygen -t rsa -b 4096 -C "kungreat2021@outlook.com"
 git config --list
 git config core.ignorecase false
 git config --global core.ignorecase false
-
-
+git更新版本后文件不是当前用户时没有权限,忽略掉检查
+git config --global --add safe.directory '*'
 
 git push -u origin master
