@@ -21,8 +21,8 @@ public class TwoMain {
             }
         }
 
-        thread1.join();//等待thread1线程对象锁毁
-        thread2.join();//等待thread2线程对象锁毁
+        thread1.join();//等待thread1线程对象销毁
+        thread2.join();//等待thread2线程对象销毁
 
         System.out.println(CooperationTwo.num);
     }
